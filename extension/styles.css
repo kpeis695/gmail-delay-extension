@@ -36,7 +36,7 @@
     width: 100% !important;
     height: 100% !important;
     background: rgba(0, 0, 0, 0.6) !important;
-    z-index: 10000 !important;
+    z-index: 999999 !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -52,6 +52,8 @@
     width: 90% !important;
     font-family: 'Google Sans', Roboto, sans-serif !important;
     animation: slideInUp 0.3s ease-out !important;
+    z-index: 999999 !important;
+    position: relative !important;
 }
 
 .gmail-delay-modal h2 {
