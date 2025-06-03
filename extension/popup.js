@@ -121,7 +121,7 @@ async function loadQueuedEmails() {
     } catch (error) {
         console.error('Error loading emails:', error);
         loadingEl.style.display = 'none';
-        showError('Failed to load queued emails. Check server connection.');
+        showError('Failed to load pending emails. Check server connection.');
     }
 }
 
@@ -143,6 +143,7 @@ function displayEmails(emails) {
             <div class="email-to">To: ${email.to.join(', ')}</div>
             <div class="email-timing">
                 Sends in ${minutesUntilSend} minutes (${sendTime.toLocaleString()})
+                <br><small style="color: #ea4335;">⏰ Extended undo active - can edit/cancel</small>
             </div>
             <div class="email-actions">
                 <button class="btn edit-btn" data-email-id="${email.id}">Edit</button>
@@ -174,8 +175,8 @@ function displayEmails(emails) {
 function showEmptyState() {
     emailsContainer.innerHTML = `
         <div class="empty-state">
-            No queued emails.<br>
-            Compose an email in Gmail to get started!
+            No emails in extended undo period.<br>
+            Compose an email in Gmail to try it out!
         </div>
     `;
 }
