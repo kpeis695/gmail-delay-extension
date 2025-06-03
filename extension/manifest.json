@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Gmail Delay & Edit",
+  "name": "Gmail Extended Undo Send",
   "version": "1.0",
-  "description": "Delay and edit Gmail messages before sending",
+  "description": "Extend Gmail's undo send period with editing capabilities",
   "permissions": [
     "storage",
     "alarms",
@@ -26,6 +26,6 @@
   },
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Gmail Delay & Edit"
+    "default_title": "Gmail Extended Undo Send"
   }
 }
