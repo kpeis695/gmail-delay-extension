@@ -1,0 +1,228 @@
+/* Gmail Delay Extension Styles */
+
+/* Notification styles */
+.gmail-delay-notification {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    padding: 15px 20px !important;
+    border-radius: 8px !important;
+    color: white !important;
+    z-index: 10001 !important;
+    font-family: 'Google Sans', Roboto, sans-serif !important;
+    font-size: 14px !important;
+    max-width: 350px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    animation: slideInRight 0.3s ease-out !important;
+}
+
+.gmail-delay-notification.success {
+    background: #137333 !important;
+}
+
+.gmail-delay-notification.error {
+    background: #d93025 !important;
+}
+
+.gmail-delay-notification.info {
+    background: #1a73e8 !important;
+}
+
+/* Modal overlay */
+.gmail-delay-modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    z-index: 10000 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    animation: fadeIn 0.2s ease-out !important;
+}
+
+.gmail-delay-modal {
+    background: white !important;
+    padding: 30px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    max-width: 500px !important;
+    width: 90% !important;
+    font-family: 'Google Sans', Roboto, sans-serif !important;
+    animation: slideInUp 0.3s ease-out !important;
+}
+
+.gmail-delay-modal h2 {
+    margin: 0 0 20px 0 !important;
+    color: #1a73e8 !important;
+    font-size: 20px !important;
+    font-weight: 500 !important;
+}
+
+.gmail-delay-modal p {
+    margin: 0 0 20px 0 !important;
+    color: #5f6368 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+}
+
+/* Delay options */
+.gmail-delay-options {
+    margin-bottom: 25px !important;
+}
+
+.gmail-delay-option {
+    display: block !important;
+    margin-bottom: 12px !important;
+    font-size: 14px !important;
+    color: #3c4043 !important;
+    cursor: pointer !important;
+    padding: 8px !important;
+    border-radius: 6px !important;
+    transition: background-color 0.2s !important;
+}
+
+.gmail-delay-option:hover {
+    background: #f8f9fa !important;
+}
+
+.gmail-delay-option input[type="radio"] {
+    margin-right: 12px !important;
+    accent-color: #1a73e8 !important;
+}
+
+.gmail-delay-custom-input {
+    margin-left: 10px !important;
+    padding: 6px 8px !important;
+    border: 1px solid #dadce0 !important;
+    border-radius: 4px !important;
+    width: 80px !important;
+    font-size: 14px !important;
+}
+
+.gmail-delay-custom-input:focus {
+    outline: none !important;
+    border-color: #1a73e8 !important;
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2) !important;
+}
+
+/* Modal buttons */
+.gmail-delay-modal-buttons {
+    text-align: right !important;
+    margin-top: 25px !important;
+}
+
+.gmail-delay-btn {
+    padding: 10px 20px !important;
+    border-radius: 6px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: all 0.2s !important;
+    margin-left: 12px !important;
+    border: none !important;
+    font-family: inherit !important;
+}
+
+.gmail-delay-btn-secondary {
+    background: #f8f9fa !important;
+    color: #3c4043 !important;
+    border: 1px solid #dadce0 !important;
+}
+
+.gmail-delay-btn-secondary:hover {
+    background: #e8eaed !important;
+}
+
+.gmail-delay-btn-primary {
+    background: #1a73e8 !important;
+    color: white !important;
+}
+
+.gmail-delay-btn-primary:hover {
+    background: #1557b0 !important;
+}
+
+.gmail-delay-btn-primary:active {
+    background: #0d47a1 !important;
+}
+
+/* Queue indicator for compose window */
+.gmail-delay-queued-indicator {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    background: #137333 !important;
+    color: white !important;
+    padding: 4px 8px !important;
+    border-radius: 12px !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    z-index: 100 !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Override Gmail styles if needed */
+.gmail-delay-modal * {
+    box-sizing: border-box !important;
+}
+
+/* Loading spinner */
+.gmail-delay-spinner {
+    display: inline-block !important;
+    width: 16px !important;
+    height: 16px !important;
+    border: 2px solid #f3f3f3 !important;
+    border-top: 2px solid #1a73e8 !important;
+    border-radius: 50% !important;
+    animation: spin 1s linear infinite !important;
+    margin-right: 8px !important;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Status indicators in Gmail */
+.gmail-delay-status {
+    font-size: 11px !important;
+    color: #5f6368 !important;
+    background: #f8f9fa !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    margin-left: 8px !important;
+}
