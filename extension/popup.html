@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 400px;
+            min-height: 300px;
+            font-family: 'Google Sans', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 18px;
+            color: #1a73e8;
+            font-weight: 500;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .status.connected {
+            background: #e8f5e8;
+            color: #137333;
+        }
+        
+        .status.disconnected {
+            background: #fce8e6;
+            color: #d93025;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status.connected .status-dot {
+            background: #137333;
+        }
+        
+        .status.disconnected .status-dot {
+            background: #d93025;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .section h3 {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #3c4043;
+        }
+        
+        .email-item {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .email-subject {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #1a73e8;
+            font-size: 14px;
+        }
+        
+        .email-to {
+            font-size: 12px;
+            color: #5f6368;
+            margin-bottom: 8px;
+        }
+        
+        .email-timing {
+            font-size: 12px;
+            color: #5f6368;
+            margin-bottom: 10px;
+        }
+        
+        .email-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .btn {
+            padding: 6px 12px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            background: white;
+            color: #3c4043;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .btn:hover {
+            background: #f8f9fa;
+        }
+        
+        .btn.primary {
+            background: #1a73e8;
+            color: white;
+            border-color: #1a73e8;
+        }
+        
+        .btn.primary:hover {
+            background: #1557b0;
+        }
+        
+        .btn.danger {
+            background: #d93025;
+            color: white;
+            border-color: #d93025;
+        }
+        
+        .btn.danger:hover {
+            background: #b52d20;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #5f6368;
+            font-size: 14px;
+            padding: 40px 20px;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #5f6368;
+            font-size: 14px;
+            padding: 20px;
+        }
+        
+        .error {
+            background: #fce8e6;
+            color: #d93025;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .refresh-btn {
+            display: block;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Gmail Delay & Edit</h1>
+    </div>
+    
+    <div id="status" class="status disconnected">
+        <div class="status-dot"></div>
+        <span>Connecting to server...</span>
+    </div>
+    
+    <div id="error" class="error" style="display: none;"></div>
+    
+    <button id="refresh" class="btn refresh-btn">Refresh Queued Emails</button>
+    
+    <div class="section">
+        <h3>Queued Emails</h3>
+        <div id="loading" class="loading">Loading...</div>
+        <div id="emails-container"></div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border-radius: 8px; width: 80%; max-width: 500px;">
+            <h3>Edit Email</h3>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 500;">Subject:</label>
+                <input type="text" id="editSubject" style="width: 100%; padding: 8px; border: 1px solid #dadce0; border-radius: 4px;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 500;">Body:</label>
+                <textarea id="editBody" rows="6" style="width: 100%; padding: 8px; border: 1px solid #dadce0; border-radius: 4px; resize: vertical;"></textarea>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; margin-bottom: 5px; font-weight: 500;">Delay (minutes):</label>
+                <input type="number" id="editDelay" style="width: 100px; padding: 8px; border: 1px solid #dadce0; border-radius: 4px;">
+            </div>
+            <div style="text-align: right;">
+                <button id="cancelEdit" class="btn">Cancel</button>
+                <button id="saveEdit" class="btn primary" style="margin-left: 10px;">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
