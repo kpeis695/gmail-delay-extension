@@ -7,7 +7,8 @@
     "storage",
     "alarms",
     "activeTab",
-    "identity"
+    "identity",
+    "notifications"
   ],
   "host_permissions": [
     "https://mail.google.com/*",
