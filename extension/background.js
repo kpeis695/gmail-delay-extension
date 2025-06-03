@@ -9,7 +9,7 @@ chrome.runtime.onInstalled.addListener((details) => {
         // Show welcome notification
         chrome.notifications.create({
             type: 'basic',
-            iconUrl: 'icon48.png',
+            iconUrl: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==', // 1x1 transparent pixel
             title: 'Gmail Delay & Edit Installed!',
             message: 'Start delaying emails by composing in Gmail. Make sure to start the Python backend server.'
         });
